@@ -1,27 +1,32 @@
 def main():
 	number_of_sums = 0
 	maxsums = 0
-	denominator = 4
+	denominator = 10
+	denominator_delta = 10
 	denoms = []
 	
+#	THIS IS VERY SLOW...
 #	while (number_of_sums <=10):
-	while (denominator <= 10):
+	while (maxsums <= 1000):
 		# reset number of sums
 		number_of_sums = 0
+		denoms = []
 		
-		for i in range(2, denominator * 2):
-			for subtract in range(0, i-1):
-				new_denominator = i * denominator
-				numer1 = i - subtract
+		for i in range(2, denominator + 2):			# iterate factor from 2 to denominator + 1
+			for subtract in range(1, (i//2)+1):		# iterate from 1 to i/2
+				new_denominator = i * denominator		# calculate new denominator
+				numer1 = i - subtract					# split numerator
 				numer2 = i - numer1
-				reduced_d1 = new_denominator // numer1
-				reduced_d2 = new_denominator // numer2
+				#print ("Trying %d/%d =\t%d/%d + %d/%d\tsub: %d\t%s %s" % (i, new_denominator, numer1, new_denominator, numer2, new_denominator, subtract,(new_denominator%numer1==0),(new_denominator%numer2==0)))
 				
-				if (new_denominator % numer1 == 0 and new_denominator % numer2 == 0 and reduced_d1 not in denoms):
-					print ("1/%d = 1/%d + 1/%d" % denominator, reduced_d1, reduced_d2)
-					number_of_sums += 1
-					denoms.append(reduced_d1)
-					denoms.append(reduced_d2)
+				if (new_denominator % numer1 == 0 and new_denominator % numer2 == 0):
+					reduced_d1 = new_denominator // numer1
+					reduced_d2 = new_denominator // numer2
+					if (reduced_d1 not in denoms):
+						#print ("1/%d = 1/%d + 1/%d" % (denominator, reduced_d1, reduced_d2))
+						number_of_sums += 1
+						denoms.append(reduced_d1)
+						denoms.append(reduced_d2)
 		
 		
 		
@@ -30,9 +35,9 @@ def main():
 			print("1/%d had %d forms" % (denominator, number_of_sums))
 		
 		# increase denominator for next loop
-		denominator += 1
+		denominator += denominator_delta
 	
-	print("1/%d had %d forms" % (denominator, number_of_sums))
+	print("1/%d had %d forms" % (denominator-denominator_delta, number_of_sums))
 		
 main()
 
