@@ -1,13 +1,13 @@
 def main():
 	number_of_sums = 0
 	maxsums = 0
-	denominator = 10
-	denominator_delta = 10
+	denominator = 4
+	denominator_delta = 1
 	denoms = []
 	
 #	THIS IS VERY SLOW...
-#	while (number_of_sums <=10):
-	while (maxsums <= 1000):
+#	while (denominator <=80):
+	while (maxsums <= 100):			
 		# reset number of sums
 		number_of_sums = 0
 		denoms = []
